@@ -188,6 +188,54 @@ The following checks were performed during lab configuration:
 | External IP connectivity | Successful |
 | DNS resolution | Successful |
 
+### 10.1 Drag and Drop Issue – Shared Folder Solution
+
+**Problem:**
+
+During the lab setup, drag-and-drop functionality between the Windows 11 host and Kali Linux guest operating system was not working as expected. This created difficulties when transferring files between the two environments.
+
+**Solution:**
+
+Instead of relying on drag-and-drop functionality, VirtualBox Shared Folders were configured to enable file exchange between the host and guest operating systems.
+
+**Configuration Steps:**
+
+1. Created a shared folder on the Windows 11 host.
+2. Opened VirtualBox VM Settings → Shared Folders.
+3. Added the host folder to the virtual machine configuration.
+4. Enabled Auto-mount and Full Access.
+5. Accessed the shared folder from Kali Linux.
+
+**Shared Folder Configuration:**
+
+| Parameter | Configuration |
+|---|---|
+| Host OS | Windows 11 |
+| Guest OS | Kali Linux |
+| Shared Folder | Cybersecurity-Lab-Shared |
+| Auto-mount | Enabled |
+| Access | Full Access |
+
+**Accessing the Shared Folder:**
+
+The automatically mounted shared folder can be accessed using:
+
+```bash
+cd /media/sf_Cybersecurity-Lab-Shared
+```
+
+If permission is denied, add the current Kali Linux user to the VirtualBox shared-folder group:
+
+```bash
+sudo usermod -aG vboxsf $USER
+```
+
+Log out and log back in for the group membership change to take effect.
+
+**Outcome:**
+
+VirtualBox Shared Folders provided an alternative method for transferring files between the Windows host and Kali Linux guest without depending on drag-and-drop functionality.
+
 ## 11. Project Structure
 
 ```text
@@ -214,6 +262,7 @@ Cybersecurity-Virtual-Lab/
 - Working with static IPv4 addressing and routing.
 - Performing network connectivity and DNS verification.
 - Developing practical network traffic analysis skills.
+- Troubleshooting file-sharing issues between host and guest systems.
 - Gaining exposure to cybersecurity assessment tools.
 
 ## 13. Future Improvements
